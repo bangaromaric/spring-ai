@@ -1,7 +1,7 @@
 # Assistant IA pour les Démarches Administratives au Gabon
 ![Architechture_Spring-AI.jpg](Architechture_Spring-AI.jpg)
 ## Description
-Ce projet vise à développer un assistant intelligent capable de guider les citoyens gabonais dans leurs démarches administratives. Il utilise l'intelligence artificielle générative via Spring AI pour fournir des réponses précises et personnalisées aux questions administratives.
+Ce projet vise à développer un assistant intelligent capable de guider les citoyens gabonais dans leurs démarches administratives. Il utilise l'intelligence artificielle générative via Spring AI pour fournir des réponses précises et personnalisées aux questions administratives. L'acticle est [disponible sur Medium](https://medium.com/@bangaromaric/boostez-votre-application-spring-boot-avec-lia-générative-spring-ai-et-tool-calling-fc9fe16cd8e7)
 
 ## Fonctionnalités
 - Réponses automatiques aux questions administratives
