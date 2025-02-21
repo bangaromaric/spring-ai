@@ -14,6 +14,7 @@ Ce projet vise à développer un assistant intelligent capable de guider les cit
 - **Spring Data JPA** : Gestion des interactions avec la base de données
 - **H2 Database** : Base de données embarquée pour le stockage temporaire
 - **Spring AI** : Intégration de l'intelligence artificielle générative
+- **JavaScript** : Langage de programmation essentiel du web, il apporte interactivité et dynamisme aux pages web
 
 ## Prérequis
 Avant d'exécuter l'application, assurez-vous d'avoir installé les éléments suivants :
