@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: spring-ai
+
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY}
+      chat:
+        options:
+          model: claude-3-5-sonnet-latest
+          temperature: 0.1
+          max-tokens: 450
+    retry:
+      max-attempts: 10
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:springai;DB_CLOSE_DELAY=-1
+    username: springai
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  h2:
+    console:
+      enabled: true
+
+  sql:
+    init:
+      mode: always
+
+  # Activer la création et mise à jour automatique des tables
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true  # Important : permet d'exécuter data.sql après la création des tables
+
+

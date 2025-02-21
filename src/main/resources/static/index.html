@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant Administratif</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Icônes Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+<div class="drapeau" style="height: 10px"></div>
+    <header class="header">
+        <div class="logo-container">
+            <span class="material-icons-round logo-icon">assistant</span>
+            <h1>Assistant Virtuel</h1>
+        </div>
+        <p class="subtitle">Votre guide numérique pour les démarches administratives</p>
+    </header>
+
+    <div class="input-section">
+        <div class="input-group">
+            <textarea id="textInput" placeholder=" "></textarea>
+            <label for="textInput">Écrivez votre question</label>
+            <button id="sendText" class="btn-primary">
+                <span class="material-icons-round">send</span>
+                Envoyer
+            </button>
+        </div>
+
+        <div class="audio-controls">
+            <button id="startRecording" class="btn-icon">
+                <span class="material-icons-round">mic</span>
+            </button>
+            <button id="stopRecording" class="btn-icon danger" disabled>
+                <span class="material-icons-round">stop</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="response" class="response-container">
+        <div class="response-header">
+            <h2>Réponse :</h2>
+            <div id="loader" class="loader" style="display: none;"></div>
+        </div>
+        <div class="response-content">
+            <p id="responseText">Aucune réponse pour l'instant...</p>
+            <audio id="audioResponse" controls style="display: none;"></audio>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
