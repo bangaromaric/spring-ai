@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    API_URL: 'http://172.17.4.12:8080/ai/demande',
+    API_URL: 'http://localhost:8080/ai/demande',
     RECOGNITION_LANG: 'fr-FR',
     ELEMENTS: {
         sendButton: document.getElementById('sendText'),
