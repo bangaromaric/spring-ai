@@ -11,6 +11,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
@@ -56,7 +57,7 @@ public class ChatController {
     }
 
     @GetMapping("/ai/demande")
-    public Map generateCustomer(@RequestParam(value = "message") String message) {
+    public Map generateDemande(@RequestParam(value = "message") String message) {
         String response = ChatClient.create(chatModel)
                 .prompt(message)
                 .tools(new DemandeTools())
@@ -64,5 +65,16 @@ public class ChatController {
                 .call()
                 .content();
         return Map.of("generation", response);
+    }
+
+    @GetMapping(value = "/ai/demande-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> generateDemandeStream(@RequestParam(value = "message") String message) {
+
+        return ChatClient.create(chatModel)
+                .prompt(message)
+                .tools(new DemandeTools())
+                .toolContext(Map.of("demandeRepository", demandeRepository))
+                .stream()
+                .content();
     }
 }
