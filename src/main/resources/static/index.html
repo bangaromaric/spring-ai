@@ -43,11 +43,23 @@
     <div id="response" class="response-container">
         <div class="response-header">
             <h2>Réponse :</h2>
+            <div class="speech-controls">
+                <button id="playSpeech" title="Lire">
+                    <span class="material-icons-round">play_arrow</span>
+                </button>
+                <button id="pauseSpeech" title="Pause">
+                    <span class="material-icons-round">pause</span>
+                </button>
+                <button id="stopSpeech" title="Arrêter">
+                    <span class="material-icons-round">stop</span>
+                </button>
+            </div>
             <div id="loader" class="loader" style="display: none;"></div>
         </div>
         <div class="response-content">
             <p id="responseText">Aucune réponse pour l'instant...</p>
             <audio id="audioResponse" controls style="display: none;"></audio>
+
         </div>
     </div>
 </div>

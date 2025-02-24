@@ -228,6 +228,21 @@ textarea:not(:placeholder-shown) + label {
     z-index: 1;
 }
 
+/* Contrôles de lecture vocale */
+.speech-controls {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.speech-controls button {
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    border: none;
+    cursor: pointer;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }

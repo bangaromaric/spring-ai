@@ -8,7 +8,10 @@ const CONFIG = {
         startRecording: document.getElementById('startRecording'),
         stopRecording: document.getElementById('stopRecording'),
         responseText: document.getElementById('responseText'),
-        loader: document.getElementById('loader')
+        loader: document.getElementById('loader'),
+        playSpeech: document.getElementById('playSpeech'),
+        pauseSpeech: document.getElementById('pauseSpeech'),
+        stopSpeech: document.getElementById('stopSpeech')
     }
 };
 
@@ -18,6 +21,24 @@ class VoiceChatApp {
         this.isRecording = false;
         this.initializeSpeechRecognition();
         this.initializeEventListeners();
+        this.synth = window.speechSynthesis;
+        this.utterance = null;
+        this.initializeSpeechControls();
+    }
+    initializeSpeechControls() {
+        CONFIG.ELEMENTS.playSpeech.addEventListener('click', () => {
+            if (this.synth.paused) {
+                this.synth.resume();
+            } else {
+                this.utterance = new SpeechSynthesisUtterance(
+                    CONFIG.ELEMENTS.responseText.innerText
+                );
+                this.synth.speak(this.utterance);
+            }
+        });
+
+        CONFIG.ELEMENTS.pauseSpeech.addEventListener('click', () => this.synth.pause());
+        CONFIG.ELEMENTS.stopSpeech.addEventListener('click', () => this.synth.cancel());
     }
 
     initializeSpeechRecognition() {
@@ -137,6 +158,16 @@ class VoiceChatApp {
 
             const data = await response.json();
             CONFIG.ELEMENTS.responseText.innerText = data.generation;
+
+            // Lecture vocale du texte
+            // if ('speechSynthesis' in window) {
+            //     const utterance = new SpeechSynthesisUtterance(data.generation);
+            //     utterance.lang = 'fr-FR'; // Langue française
+            //     utterance.rate = 1; // Vitesse normale
+            //     window.speechSynthesis.speak(utterance);
+            // } else {
+            //     console.warn("Synthèse vocale non supportée");
+            // }
 
         } catch (error) {
             console.error('Erreur:', error);
