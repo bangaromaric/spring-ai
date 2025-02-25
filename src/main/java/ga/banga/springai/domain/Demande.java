@@ -18,14 +18,16 @@ public class Demande {
     private Long id;
 
     @Column(nullable = false)
-    private String nom; // Nom de la démarche (ex: Passeport, Carte d'identité)
+    private String nom;
+
+    @Column(nullable = false)
+    private String libelle;
 
     @Enumerated(EnumType.STRING)
     private ProcedureType type;
 
     @Column(columnDefinition = "TEXT")
     private String description; // Détails sur la démarche
-
 
     @Column(name = "delai_moyen")
     private String delaiMoyen;
@@ -49,6 +51,14 @@ public class Demande {
 
     // Constructeurs, Getters, Setters
 
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
 
     public ProcedureType getType() {
         return type;

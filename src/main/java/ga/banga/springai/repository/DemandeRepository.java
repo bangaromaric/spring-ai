@@ -24,7 +24,7 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
             "LEFT JOIN FETCH d.etapes " +
             "LEFT JOIN FETCH d.couts " +
             "LEFT JOIN FETCH d.centres " +
-            "WHERE UPPER(d.nom) = UPPER(:nom) and d.type=:type")
-    Demande findByNomWithAllCollections(@Param("nom") String nom, ProcedureType type);
+            "WHERE UPPER(d.libelle) = UPPER(:libelle) and d.type=:type")
+    Demande findByNomWithAllCollections(@Param("libelle") String libelle, ProcedureType type);
 
 }

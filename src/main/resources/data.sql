@@ -6,18 +6,17 @@ INSERT INTO centre_service (nom, adresse, contact) VALUES
 
 
 -- Insertion des types de démarches
-INSERT INTO demande (nom, type, description, delai_moyen) VALUES
-                                                                          ('Passeport', 'NOUVELLE', 'Délivrance d’un passeport biométrique.',  '30 jours'),
-                                                                          ('Carte Nationale d’Identité', 'NOUVELLE', 'Obtention d’une CNI pour les citoyens gabonais.',  '10 jours'),
-                                                                          ('Permis de Conduire', 'RENOUVELLEMENT', 'Renouvellement du permis de conduire après expiration.',  '7 jours'),
-                                                                          ('Extrait de Naissance', 'DUPLICATA', 'Délivrance d’un duplicata de l’acte de naissance.',  '5 jours'),
-                                                                          ('Passeport', 'RENOUVELLEMENT', 'Renouvellement du passeport biométrique.',  '15 jours');
+INSERT INTO demande (nom,libelle, type, description, delai_moyen) VALUES
+                                                                          ('Passeport','PASSEPORT', 'NOUVELLE', 'Délivrance d’un passeport biométrique.',  '30 jours'),
+                                                                          ('Carte Nationale d’Identité','CNI', 'NOUVELLE', 'Obtention d’une CNI pour les citoyens gabonais.',  '10 jours'),
+                                                                          ('Permis de Conduire','PERMIS_CONDUIRE', 'RENOUVELLEMENT', 'Renouvellement du permis de conduire après expiration.',  '7 jours'),
+                                                                          ('Extrait de Naissance','EXTRAIT_NAISSANCE', 'DUPLICATA', 'Délivrance d’un duplicata de l’acte de naissance.',  '5 jours'),
+                                                                          ('Passeport','PASSEPORT', 'RENOUVELLEMENT', 'Renouvellement du passeport biométrique.',  '15 jours');
 
 
 INSERT INTO demande_centre (demande_id, centre_id) VALUES
                                                        (1, 1), -- Passeport -> DGDI
-                                                       (1, 3), -- Passeport -> Ambassade du Gabon en France
-                                                       (2, 1), -- Carte d'identité -> Préfecture de Libreville
+                                                       (2, 1), -- Carte d'identité -> DGDI
                                                        (3, 2), -- Permis de conduire -> Mairie d’Owendo
                                                        (4, 1), -- Extrait de naissance -> Préfecture de Libreville
                                                        (5, 1); -- Passeport renouvellement -> DGDI
@@ -37,7 +36,12 @@ INSERT INTO document_requis (nom, demande_id, obligatoire) VALUES
                                                                ('Acte de naissance', 5, true), -- Duplicata d’extrait de naissance
                                                                ('Une lettre de procuration', 5, true), -- Duplicata d’extrait de naissance
                                                                ('Preuve de non résidence au Gabon', 5, true), -- Duplicata d’extrait de naissance
-                                                               ('Tout autre document nécessaire', 5, true); -- Duplicata d’extrait de naissance
+                                                               ('Tout autre document nécessaire', 5, true), -- Duplicata d’extrait de naissance
+--                                                                CNI
+                                                               ('Attestation NIP (Format PDF)', 2, true), -- Duplicata d’extrait de naissance
+                                                               ('Acte de naissance / Décret / Jugements', 2, true), -- Duplicata d’extrait de naissance
+                                                               ('Copie de passeport', 2, true), -- Duplicata d’extrait de naissance
+                                                               ('Acte de mariage pour les femmes mariées', 2, true); -- Duplicata d’extrait de naissance
 
 
 INSERT INTO etape (ordre, titre, details, demande_id) VALUES
@@ -51,7 +55,14 @@ INSERT INTO etape (ordre, titre, details, demande_id) VALUES
                                                           (2, 'Saisie des informations personnelles', 'Vous devrez correctement remplir, en ligne, le formulaire de demande de renouvellement.', 5),
                                                           (3, 'Photo', 'Dans cette étape vous devrez fournir votre photo au format JPEG ou PNG et respectant les normes ICAO.', 5),
                                                           (4, 'Ajout des documents justificatifs', 'Les documents justificatifs à fournir sont : Ancien passeport ; Acte de naissance ; Une lettre de procuration ; Preuve de non résidence au Gabon ; Tout autre document nécessaire', 5),
-                                                          (5, 'Paiement et validation', 'L’option de paiement sur place est disponible', 5);
+                                                          (5, 'Paiement et validation', 'L’option de paiement sur place est disponible', 5),
+--                                                          CNIE
+                                                          (1, 'Vérification de votre titre', 'Vous devez fournir les informations exactes de votre Passeport ou CNI électronique.', 2),
+                                                          (2, 'Saisie des informations personnelles', 'Vous devrez correctement remplir, en ligne, le formulaire de demande de CNIE.', 2),
+                                                          (3, 'Photo d’identité', 'Dans cette étape vous devrez fournir votre photo au format JPEG ou PNG et respectant les normes', 2),
+                                                          (4, 'Documents à scanner', 'Les documents justificatifs à fournir', 2),
+                                                          (5, 'Code PIN et remise', 'Votre CNI électronique sera protégée par un code PIN confidentiel, et récupérée au lieu de remise de votre choix.', 2),
+                                                          (6, 'Synthèse et validation', 'Une synthèse de toutes les données fournies.', 2);
 
 
 
