@@ -17,12 +17,24 @@ public class DocumentRequis {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "demande_id", nullable = false)
-    private Demandes demande;
+    private Demande demande;
+
+    @Column(nullable = false)
+    private boolean obligatoire = true;
 
     // Constructeurs, Getters, Setters
 
 
+
     public DocumentRequis() {
+    }
+
+    public boolean isObligatoire() {
+        return obligatoire;
+    }
+
+    public void setObligatoire(boolean obligatoire) {
+        this.obligatoire = obligatoire;
     }
 
 
@@ -42,11 +54,21 @@ public class DocumentRequis {
         this.nom = nom;
     }
 
-    public Demandes getDemande() {
+    public Demande getDemande() {
         return demande;
     }
 
-    public void setDemande(Demandes demande) {
+    public void setDemande(Demande demande) {
         this.demande = demande;
+    }
+
+    @Override
+    public String toString() {
+        return "DocumentRequis{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", demande=" + demande +
+                ", obligatoire=" + obligatoire +
+                '}';
     }
 }

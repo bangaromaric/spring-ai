@@ -1,6 +1,6 @@
 package ga.banga.springai.service;
 
-import ga.banga.springai.domain.Demandes;
+import ga.banga.springai.domain.Demande;
 import ga.banga.springai.domain.DocumentRequis;
 import ga.banga.springai.repository.DemandeRepository;
 import ga.banga.springai.repository.DocumentRequisRepository;
@@ -20,8 +20,8 @@ public class DemandeService {
         this.documentRequisRepository = documentRequisRepository;
     }
 
-    public Demandes ajouterDemandeAvecDocuments(String nom, String description, List<String> documents) {
-        Demandes demande = new Demandes();
+    public Demande ajouterDemandeAvecDocuments(String nom, String description, List<String> documents) {
+        Demande demande = new Demande();
         demande.setNom(nom);
         demande.setDescription(description);
         demande = demandeRepository.save(demande);

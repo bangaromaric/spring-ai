@@ -23,7 +23,7 @@ public class DemandeCitoyens {
 
     @ManyToOne
     @JoinColumn(name = "demande_id")
-    private Demandes demande; // Démarche identifiée par l'IA
+    private Demande demande; // Démarche identifiée par l'IA
 
     @Column(columnDefinition = "TEXT")
     private String reponseIA; // Réponse fournie par l'IA
@@ -72,11 +72,11 @@ public class DemandeCitoyens {
         this.message = message;
     }
 
-    public Demandes getDemande() {
+    public Demande getDemande() {
         return demande;
     }
 
-    public void setDemande(Demandes demande) {
+    public void setDemande(Demande demande) {
         this.demande = demande;
     }
 

@@ -1,6 +1,7 @@
 package ga.banga.springai;
 
-import ga.banga.springai.domain.Demandes;
+import ga.banga.springai.domain.Demande;
+import ga.banga.springai.domain.ProcedureType;
 import ga.banga.springai.repository.DemandeRepository;
 import ga.banga.springai.tools.DemandeTools;
 import ga.banga.springai.tools.DateTimeTools;
@@ -8,15 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.anthropic.AnthropicChatModel;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
-import java.text.Normalizer;
 import java.util.Map;
 
 @CrossOrigin
@@ -70,12 +67,17 @@ public class ChatController {
 
     @GetMapping(value = "/ai/demande-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> generateDemandeStream(@RequestParam(value = "message") String message) {
-
         return ChatClient.create(chatModel)
                 .prompt(message)
                 .tools(new DemandeTools())
                 .toolContext(Map.of("demandeRepository", demandeRepository))
                 .stream()
                 .content();
+    }
+
+    @GetMapping(value = "/ai/get-demande")
+    public ResponseEntity<Demande> getDemande(@RequestParam(value = "message") String message) {
+        Demande demande = demandeRepository.findByNomWithAllCollections("Passeport", ProcedureType.RENOUVELLEMENT);
+        return ResponseEntity.ok(demande);
     }
 }
