@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.anthropic.AnthropicChatModel;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,13 @@ public class ChatController {
 
     private final DemandeRepository demandeRepository;
     private final AnthropicChatModel chatModel;
+    private final OllamaChatModel chatModelOllama;
 
-    public ChatController(DemandeRepository demandeRepository, AnthropicChatModel chatModel) {
+
+    public ChatController(DemandeRepository demandeRepository, AnthropicChatModel chatModel, OllamaChatModel chatModelOllama) {
         this.demandeRepository = demandeRepository;
         this.chatModel = chatModel;
+        this.chatModelOllama = chatModelOllama;
     }
 
     @GetMapping("/ai/generate")
@@ -79,5 +83,21 @@ public class ChatController {
     public ResponseEntity<Demande> getDemande(@RequestParam(value = "message") String message) {
         Demande demande = demandeRepository.findByNomWithAllCollections("Passeport", ProcedureType.RENOUVELLEMENT);
         return ResponseEntity.ok(demande);
+    }
+
+    @GetMapping("/ai/generate-ollama")
+    public Map<String,String> generateOllama(@RequestParam(value = "message") String message) {
+        return Map.of("generation", this.chatModelOllama.call(message));
+    }
+
+    @GetMapping("/ai/generate-ollama-tool")
+    public ResponseEntity<Map<String, String>> generateOllamaTool(@RequestParam(value = "message") String message) {
+        String response = ChatClient.create(chatModelOllama)
+                .prompt(message)
+                .tools(new DemandeTools())
+                .toolContext(Map.of("demandeRepository", this.demandeRepository))
+                .call()
+                .content();
+        return ResponseEntity.ok(Map.of("generation", response));
     }
 }

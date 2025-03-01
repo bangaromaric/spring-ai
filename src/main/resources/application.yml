@@ -12,6 +12,12 @@ spring:
     name: spring-ai
 
   ai:
+    ollama:
+      base-url: http://10.0.156.29:11434
+      chat:
+        enabled: true
+        options:
+          model: llama3.2 #mistral
     anthropic:
       api-key: ${ANTHROPIC_API_KEY}
       chat:
